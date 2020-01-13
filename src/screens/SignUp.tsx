@@ -5,6 +5,8 @@ import { useNavigation } from '@react-navigation/native';
 import Input from '../components/Input';
 import Button from '../components/Button';
 import Link from '../components/Link';
+import { createUser } from '../api/user';
+import { useToast } from '../toast/ToastProvider';
 
 const SignUp = () => {
   const [firstName, setFirstName] = useState('');
@@ -14,6 +16,7 @@ const SignUp = () => {
   const [password, setPassword] = useState('');
 
   const { navigate } = useNavigation();
+  const { showToast } = useToast();
 
   return (
     <KeyboardAvoidingView
@@ -61,11 +64,42 @@ const SignUp = () => {
         />
         <Button
           label="Create Account"
+          // disabled={
+          /* These are arbitrary, in a real world app I would add validators */
+          //   firstName.length < 2 ||
+          //   lastName.length < 3 ||
+          //   username.length < 5 ||
+          //   mobilePhone.length !== 10 ||
+          //   password.length < 8
+          // }
           contentContainerStyle={{
             marginBottom: 16,
             marginTop: 20,
           }}
-          onPress={() => {}}
+          onPress={async () => {
+            const data = await createUser({
+              firstName,
+              lastName,
+              username,
+              mobilePhone,
+              password,
+            });
+            switch (data.status) {
+              case 200:
+                const json = await data.json();
+                console.log(json);
+                return;
+              case 400:
+                const error = await data.text();
+                showToast({
+                  text: error,
+                  type: 'error',
+                });
+                return;
+              default:
+                return;
+            }
+          }}
         />
         <Link
           label="Already have an account?"

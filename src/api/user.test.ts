@@ -1,5 +1,12 @@
 import 'isomorphic-fetch';
-import { getUsers, createUser, deleteUser, emailLogin } from './user';
+import {
+  getUsers,
+  createUser,
+  deleteUser,
+  emailLogin,
+  CreateUserResponse,
+  LoginResponse,
+} from './user';
 
 const testUsername = 'testuser';
 const testUser = {
@@ -27,7 +34,7 @@ describe('user api tests', () => {
   it('creates a user', async done => {
     const data = await createUser(testUser);
     expect(data.status).toEqual(200);
-    const json = await data.json();
+    const json = ((await data.json()) as unknown) as CreateUserResponse;
     expect(json.username).toEqual(testUser.username);
     expect(json.firstName).toEqual(testUser.firstName);
     expect(json.lastName).toEqual(testUser.lastName);
@@ -48,7 +55,7 @@ describe('user api tests', () => {
     await createUser(testUser);
     const data = await emailLogin(testUser.username, testUser.password);
     expect(data.status).toEqual(200);
-    const json = await data.json();
+    const json = ((await data.json()) as unknown) as LoginResponse;
     expect(json.username).toEqual(testUser.username);
     expect(json.firstName).toEqual(testUser.firstName);
     expect(json.lastName).toEqual(testUser.lastName);

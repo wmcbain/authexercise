@@ -27,6 +27,8 @@ const Input = (props: Props) => {
     <View
       style={{
         marginBottom: 12,
+        borderBottomColor: 'darkgray',
+        borderBottomWidth: 1,
       }}>
       <TextInput
         value={value}
@@ -35,7 +37,7 @@ const Input = (props: Props) => {
         returnKeyType={returnKeyType}
         style={{
           fontSize: 18,
-          padding: 12,
+          paddingVertical: 12,
         }}
         onChangeText={val => {
           onChangeText(val);

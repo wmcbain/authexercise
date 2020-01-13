@@ -6,14 +6,14 @@ interface UserListRow {
   lastName: string;
 }
 
-interface CreateUserResponse {
+export interface CreateUserResponse {
   username: string;
   firstName: string;
   lastName: string;
   mobilePhone: string;
 }
 
-interface LoginResponse {
+export interface LoginResponse {
   id: string;
   username: string;
   firstName: string;
@@ -38,7 +38,7 @@ const BASE_URL = 'https://fa0o71a1zk.execute-api.us-east-1.amazonaws.com/dev';
 export const getUsers = () => fetch<UserListRow[]>(`${BASE_URL}/user`);
 
 export const createUser = (user: UserRegistrationProp) =>
-  fetch<CreateUserResponse>(`${BASE_URL}/user`, {
+  fetch<CreateUserResponse | string>(`${BASE_URL}/user`, {
     method: 'POST',
     body: JSON.stringify(user),
   });
@@ -49,4 +49,4 @@ export const deleteUser = (username: string) =>
   });
 
 export const emailLogin = (username: string, password: string) =>
-  fetch<LoginResponse>(`${BASE_URL}/user/${username}/${password}`);
+  fetch<LoginResponse | string>(`${BASE_URL}/user/${username}/${password}`);
