@@ -9,6 +9,7 @@ import { createUser } from '../api/user';
 import { useToast } from '../toast/ToastProvider';
 
 const SignUp = () => {
+  const [loading, setLoading] = useState(false);
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [username, setUsername] = useState('');
@@ -48,6 +49,7 @@ const SignUp = () => {
           placeholder="Enter your email"
           onChangeText={val => setUsername(val)}
           returnKeyType="next"
+          autoCapitalize="none"
         />
         <Input
           value={mobilePhone}
@@ -64,19 +66,21 @@ const SignUp = () => {
         />
         <Button
           label="Create Account"
-          // disabled={
           /* These are arbitrary, in a real world app I would add validators */
-          //   firstName.length < 2 ||
-          //   lastName.length < 3 ||
-          //   username.length < 5 ||
-          //   mobilePhone.length !== 10 ||
-          //   password.length < 8
-          // }
+          disabled={
+            loading ||
+            firstName.length < 2 ||
+            lastName.length < 3 ||
+            username.length < 5 ||
+            mobilePhone.length !== 10 ||
+            password.length < 8
+          }
           contentContainerStyle={{
             marginBottom: 16,
             marginTop: 20,
           }}
           onPress={async () => {
+            setLoading(true);
             const data = await createUser({
               firstName,
               lastName,
@@ -86,8 +90,13 @@ const SignUp = () => {
             });
             switch (data.status) {
               case 200:
-                const json = await data.json();
-                console.log(json);
+                showToast({
+                  text: 'Account created successfully!',
+                });
+                setTimeout(() => {
+                  navigate('Dashboard');
+                  setLoading(false);
+                }, 1000);
                 return;
               case 400:
                 const error = await data.text();

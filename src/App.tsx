@@ -5,6 +5,7 @@ import { enableScreens } from 'react-native-screens';
 
 import Login from './screens/Login';
 import SignUp from './screens/SignUp';
+import Dashboard from './screens/Dashboard';
 import ToastProvider from './toast/ToastProvider';
 import Toast from './toast/Toast';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
@@ -28,6 +29,13 @@ const App = () => {
               }}
             />
             <Stack.Screen name="Login" component={Login} />
+            <Stack.Screen
+              name="Dashboard"
+              component={Dashboard}
+              options={{
+                headerLeft: null,
+              }}
+            />
           </Stack.Navigator>
         </NavigationNativeContainer>
         <Toast />

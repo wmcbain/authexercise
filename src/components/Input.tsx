@@ -12,6 +12,7 @@ interface Props {
   onChangeText: (val: string) => void;
   keyboardType?: KeyboardTypeOptions;
   returnKeyType?: ReturnKeyTypeOptions;
+  autoCapitalize?: 'none' | 'sentences' | 'words' | 'characters';
 }
 
 const Input = (props: Props) => {
@@ -21,6 +22,7 @@ const Input = (props: Props) => {
     onChangeText,
     keyboardType,
     returnKeyType,
+    autoCapitalize,
   } = props;
 
   return (
@@ -35,6 +37,7 @@ const Input = (props: Props) => {
         placeholder={placeholder}
         keyboardType={keyboardType}
         returnKeyType={returnKeyType}
+        autoCapitalize={autoCapitalize}
         style={{
           fontSize: 18,
           paddingVertical: 12,
