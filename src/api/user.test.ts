@@ -20,7 +20,6 @@ describe('user api tests', () => {
     const data = await getUsers();
     expect(data.status).toEqual(200);
     const json = await data.json();
-
     expect(Array.isArray(json)).toBeTruthy();
     done();
   });
@@ -29,7 +28,6 @@ describe('user api tests', () => {
     const data = await createUser(testUser);
     expect(data.status).toEqual(200);
     const json = await data.json();
-
     expect(json.username).toEqual(testUser.username);
     expect(json.firstName).toEqual(testUser.firstName);
     expect(json.lastName).toEqual(testUser.lastName);

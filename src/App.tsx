@@ -15,8 +15,14 @@ const App = () => {
   return (
     <NavigationNativeContainer>
       <Stack.Navigator>
+        <Stack.Screen
+          name="SignUp"
+          component={SignUp}
+          options={{
+            title: 'Create an account',
+          }}
+        />
         <Stack.Screen name="Login" component={Login} />
-        <Stack.Screen name="SignUp" component={SignUp} />
       </Stack.Navigator>
     </NavigationNativeContainer>
   );
