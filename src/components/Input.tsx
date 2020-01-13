@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   View,
   TextInput,
-  Text,
   KeyboardTypeOptions,
   ReturnKeyTypeOptions,
 } from 'react-native';
@@ -11,20 +10,15 @@ interface Props {
   value: string;
   placeholder: string;
   onChangeText: (val: string) => void;
-  errorMessage?: string;
-  isValid?: (val: string) => boolean;
   keyboardType?: KeyboardTypeOptions;
   returnKeyType?: ReturnKeyTypeOptions;
 }
 
 const Input = (props: Props) => {
-  const [hasError, setHasError] = useState(false);
   const {
     value,
     placeholder,
     onChangeText,
-    errorMessage,
-    isValid,
     keyboardType,
     returnKeyType,
   } = props;
@@ -44,22 +38,9 @@ const Input = (props: Props) => {
           padding: 12,
         }}
         onChangeText={val => {
-          if (hasError) {
-            setHasError(false);
-          }
           onChangeText(val);
         }}
-        onBlur={() => {
-          if (!errorMessage || !isValid) {
-            return;
-          }
-          if (isValid(value)) {
-            return;
-          }
-          setHasError(true);
-        }}
       />
-      {hasError ? <Text>{errorMessage}</Text> : null}
     </View>
   );
 };
