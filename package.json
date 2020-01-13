@@ -4,16 +4,17 @@
   "private": true,
   "scripts": {
     "android": "react-native run-android",
-    "ios": "react-native run-ios",
+    "ios": "yarn pod && react-native run-ios",
     "start": "react-native start",
     "test": "jest",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx --fix",
+    "pod": "cd ios && bundle exec pod install",
     "prettier": "prettier index.js 'src/**/*.{js,jsx,ts,tsx}'"
   },
   "dependencies": {
     "@react-native-community/masked-view": "^0.1.6",
     "@react-navigation/native": "^5.0.0-alpha.25",
-    "@react-navigation/stack": "^5.0.0-alpha.59",
+    "@react-navigation/native-stack": "^5.0.0-alpha.24",
     "react": "16.9.0",
     "react-native": "0.61.5",
     "react-native-gesture-handler": "^1.5.3",
@@ -46,6 +47,13 @@
       "jsx",
       "json",
       "node"
+    ],
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/assetsTransformer.js",
+      "\\.(css|less)$": "<rootDir>/assetsTransformer.js"
+    },
+    "setupFiles": [
+      "./node_modules/react-native-gesture-handler/jestSetup.js"
     ]
   }
 }

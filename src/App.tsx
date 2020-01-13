@@ -1,16 +1,22 @@
 import React from 'react';
 import { NavigationNativeContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { enableScreens } from 'react-native-screens';
+
+import Login from './screens/Login';
+import SignUp from './screens/SignUp';
 
 declare var global: { HermesInternal: null | {} };
 
-const Stack = createStackNavigator();
+enableScreens();
+const Stack = createNativeStackNavigator();
 
 const App = () => {
   return (
     <NavigationNativeContainer>
       <Stack.Navigator>
-        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen name="SignUp" component={SignUp} />
       </Stack.Navigator>
     </NavigationNativeContainer>
   );
