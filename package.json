@@ -1,5 +1,5 @@
 {
-  "name": "AuthExercise",
+  "name": "authexercise",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -14,7 +14,7 @@
   "dependencies": {
     "@react-native-community/masked-view": "^0.1.6",
     "@react-navigation/native": "^5.0.0-alpha.25",
-    "@react-navigation/native-stack": "^5.0.0-alpha.24",
+    "@react-navigation/stack": "^5.0.0-alpha.60",
     "react": "16.9.0",
     "react-native": "0.61.5",
     "react-native-gesture-handler": "^1.5.3",
@@ -33,13 +33,15 @@
     "@typescript-eslint/parser": "^2.12.0",
     "babel-jest": "^24.9.0",
     "eslint": "^6.5.1",
+    "isomorphic-fetch": "^2.2.1",
     "jest": "^24.9.0",
+    "jest-expo": "^36.0.1",
     "metro-react-native-babel-preset": "^0.56.0",
     "react-test-renderer": "16.9.0",
     "typescript": "^3.7.3"
   },
   "jest": {
-    "preset": "react-native",
+    "preset": "jest-expo",
     "moduleFileExtensions": [
       "ts",
       "tsx",
@@ -49,8 +51,8 @@
       "node"
     ],
     "moduleNameMapper": {
-      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/assetsTransformer.js",
-      "\\.(css|less)$": "<rootDir>/assetsTransformer.js"
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/jest/assetsTransformer.js",
+      "\\.(css|less)$": "<rootDir>/jest/assetsTransformer.js"
     },
     "setupFiles": [
       "./node_modules/react-native-gesture-handler/jestSetup.js"
